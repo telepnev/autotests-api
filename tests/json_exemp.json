@@ -1,0 +1,11 @@
+{
+  "email": "user@example.com",
+  "lastName": "string",
+  "age": 43,
+  "is_student": true,
+  "courses": ["QA", "Python", "Java", {"same_object": "Тут может быть какой то объект"}],
+  "address": {
+    "city": "Moscow",
+    "zip_code": 100500
+  }
+}
