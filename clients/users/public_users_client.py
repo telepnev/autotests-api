@@ -1,7 +1,8 @@
+from typing import TypedDict
+
 from httpx import Response
 
-from clients.api_client import ApiClient
-from typing import TypedDict
+from clients.api_client import  APIClient
 
 
 class CreateUserRequest(TypedDict):
@@ -15,7 +16,7 @@ class CreateUserRequest(TypedDict):
     middleName: str
 
 
-class PublicUsersClient(ApiClient):
+class PublicUsersClient(APIClient):
     """
        Клиент для работы с /api/v1/users
        """
@@ -26,4 +27,4 @@ class PublicUsersClient(ApiClient):
         :param request: Словарь с email,password, lastName, firstName, middleName.
         :return: Ответ от сервера в виде объекта httpx.Response
         """
-        return self.client.post("/api/v1/users", json=request)
+        return self.post("/api/v1/users", json=request)

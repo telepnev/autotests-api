@@ -2,7 +2,7 @@ from typing import TypedDict
 
 from httpx import Response
 
-from clients.api_client import ApiClient
+from clients.api_client import APIClient
 
 
 # класс пот типу DTO, далее заменим на Пайдантик
@@ -21,7 +21,7 @@ class RefreshRequestDict(TypedDict):
     refreshToken: str
 
 
-class AuthenticationClient(ApiClient):
+class AuthenticationClient(APIClient):
     """
     Клиент для работы с /api/v1/authentication
     """

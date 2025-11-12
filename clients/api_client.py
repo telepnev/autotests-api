@@ -6,7 +6,7 @@ from httpx._types import RequestData, RequestFiles
 
 # Базовый ApiClient
 
-class ApiClient:
+class APIClient:
     # конструктор
     def __init__(self, client: Client):
         """
