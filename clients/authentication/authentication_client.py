@@ -6,17 +6,15 @@ from clients.api_client import APIClient
 from clients.public_http_builder import get_public_http_client
 
 
-
-class Token(TypedDict):
+class Token(TypedDict):  # Добавили структуру с токенами аутентификации
     """
-    Описание структуры запроса на получение token
+    Описание структуры аутентификационных токенов.
     """
     tokenType: str
     accessToken: str
     refreshToken: str
 
 
-# класс пот типу DTO, далее заменим на Пайдантик
 class LoginRequestDict(TypedDict):
     """
     Описание структуры запроса на аутентификацию.
@@ -24,8 +22,13 @@ class LoginRequestDict(TypedDict):
     email: str
     password: str
 
-class LoginResponseDict(TypedDict):
+
+class LoginResponseDict(TypedDict):  # Добавили структуру ответа аутентификации
+    """
+    Описание структуры ответа аутентификации.
+    """
     token: Token
+
 
 class RefreshRequestDict(TypedDict):
     """
