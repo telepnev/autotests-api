@@ -6,7 +6,32 @@ from clients.api_client import APIClient
 from clients.private_http_builder import AuthenticationUserDict, get_private_http_client
 
 
-class GeExercisesQueryDict(TypedDict):
+class Exercise(TypedDict):
+    """
+    Описание структуры Exercise.
+    """
+    id: str
+    title: str
+    courseId: str
+    maxScore: int
+    minScore: int
+    orderIndex: int
+    description: str
+    estimatedTime: str
+
+
+class GetExercisesResponseDict(TypedDict):
+    """
+    Описание ответа структуры Exercise.
+    """
+    exercises: list[Exercise]
+
+
+class GetExercisesQueryDict(TypedDict):
+    """
+    Описание структуры запроса на получение списка упражнения.
+
+    """
     courseId: str
 
 
@@ -23,6 +48,10 @@ class CreateExercisesRequestDict(TypedDict):
     estimatedTime: str
 
 
+class CreateExercisesResponseDict(TypedDict):
+    exercise: Exercise
+
+
 class UpdateExercisesRequestDict(TypedDict):
     """
     Описание структуры запроса на обновление упражнения.
@@ -37,7 +66,7 @@ class UpdateExercisesRequestDict(TypedDict):
 
 class ExercisesClient(APIClient):
 
-    def get_exercises_api(self, query: GeExercisesQueryDict) -> Response:
+    def get_exercises_api(self, query: GetExercisesQueryDict) -> Response:
         """
         Метод получения списка упражнений.
 
@@ -83,6 +112,19 @@ class ExercisesClient(APIClient):
         :return: Ответ от сервера в виде объекта httpx.Response
         """
         return self.delete(f"/api/v1/exercises/{exercise_id}")
+
+    def get_exercises(self, query: GetExercisesQueryDict) -> GetExercisesResponseDict:
+        response = self.get_exercises_api(query)
+        return response.json()
+
+    def create_exercise(self, request: CreateExercisesRequestDict) -> CreateExercisesResponseDict:
+        """
+        Функция возвращает response.json()
+        Готовый к использованию Exercises.
+        """
+        response = self.create_exercise_api(request)
+        return response.json()
+
 
 # Добавляем builder для ExercisesClient
 def get_exercise_client(user: AuthenticationUserDict) -> ExercisesClient:
